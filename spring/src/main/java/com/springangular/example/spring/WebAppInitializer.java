@@ -1,22 +1,24 @@
 package com.springangular.example.spring;
 
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration.Dynamic;
 
-public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 
-	@Override
-	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[] { RootConfig.class };
-	}
 
-	@Override
-	protected Class<?>[] getServletConfigClasses() {
-		return new Class<?>[] { WebConfig.class };
-	}
+public class WebAppInitializer implements WebApplicationInitializer  {
 
 	@Override
-	protected String[] getServletMappings() {
-		return new String[] { "/" };
+	public void onStartup(ServletContext servletContext) throws ServletException {
+		AnnotationConfigWebApplicationContext rootCtx = new AnnotationConfigWebApplicationContext();
+        rootCtx.register(WebConfig.class);
+        servletContext.addListener(new ContextLoaderListener(rootCtx));
+        Dynamic reg = servletContext.addServlet("rest", new DispatcherServlet(rootCtx));
+        reg.setLoadOnStartup(1);
+        reg.addMapping("/");	
 	}
-
 }
