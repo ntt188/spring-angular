@@ -19,6 +19,6 @@ public class WebAppInitializer implements WebApplicationInitializer  {
         servletContext.addListener(new ContextLoaderListener(rootCtx));
         Dynamic reg = servletContext.addServlet("rest", new DispatcherServlet(rootCtx));
         reg.setLoadOnStartup(1);
-        reg.addMapping("/");	
+        reg.addMapping("/service/*");	
 	}
 }
