@@ -7,11 +7,22 @@
 	</head>
 
 	<body ng-controller="PhoneListCtrl">
+        <p>Hello {{name}}</p>
+        
         <ul>
             <li ng-repeat="phone in phones">
                 <span>{{phone.name}}</span>
                 <p>{{phone.snippet}}</p>
             </li>
         </ul>
+        
+        <p>Total number of phones: {{phones.length}}</p>
+        
+        <table>
+            <tr><th ng-repeat="i in [0, 1, 2, 3, 4]">Row number {{i + 1}}</th></tr>
+            <tr ng-repeat="i in [0, 1, 2, 3, 4]">
+                <td ng-repeat="j in [0, 1, 2, 3, 4]">{{i + j}}</td>
+            </tr>
+        </table>
 	</body>
 </html>
