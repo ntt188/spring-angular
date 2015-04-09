@@ -21,5 +21,7 @@
         <li ng-repeat="phone in phones | filter:query | orderBy:orderProp"><span>{{phone.name}}</span>
             <p>{{phone.snippet}}</p></li>
     </ul>
+    
+    <pre>{{phones | filter:query | orderBy:orderProp | json}}</pre>
 </body>
 </html>
